@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+
+	function fn1(){
+		//get异步访问
+		$.get(
+			"/WEB22/ajaxServlet2", //url地址
+			{"name":"张三","age":25}, //请求参数
+			function(data){ //执行成功后的回调函数
+				//{\"name\":\"tom\",\"age\":21}
+				alert(data.name); 
+			},
+			"json"
+		);
+	}
+	function fn2(){
+		//post异步访问
+		$.post(
+			"/WEB22/ajaxServlet2", //url地址
+			{"name":"李四","age":25}, //请求参数
+			function(data){ //执行成功后的回调函数
+				alert(data.name);
+			},
+			"json"
+		);
+	}
+
+</script>
+
+</head>
+<body>
+	<input type="button" value="get访问服务器端" onclick="fn1()"><span id="span1"></span>
+	<br>
+	<input type="button" value="post访问服务器端" onclick="fn2()"><span id="span2"></span>
+	<br>
+	
+	<br>
+</body>
+</html>
+
+//**********************后台处理代码****************
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class AjaxServlet2 extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		
+		System.out.println(name+"  "+age);
+		
+		
+		//java代码只能返回一个json格式的字符串,{\"name\":\"汤姆\",\"age\":21}
+    //不能直接写一个字符串比如"hahhah"
+		response.setContentType("text/html;charset=UTF-8");
+		response.getWriter().write("{\"name\":\"汤姆\",\"age\":21}");
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
