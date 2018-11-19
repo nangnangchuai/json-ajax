@@ -1,4 +1,4 @@
-//*******************post方法提交*******************
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,7 @@
 		var xmlHttp = new XMLHttpRequest();
 		//2、绑定监听 ---- 监听服务器是否已经返回相应数据
 		xmlHttp.onreadystatechange = function(){
+		//响应成功，readyState默认有4种状态，详细看api
 			if(xmlHttp.readyState==4&&xmlHttp.status==200){
 				//5、接受相应数据
 				var res = xmlHttp.responseText;
@@ -19,11 +20,13 @@
 			}
 		}
 		//3、绑定地址
+		////js实现的原生ajax使用get提交方式
 		xmlHttp.open("GET","/WEB22/ajaxServlet?name=lisi",true);
 		//4、发送请求
 		xmlHttp.send();
 		
 	}
+	//js实现的原生ajax使用post提交方式
 	function fn2(){
 		//1、创建ajax引擎对象 ---- 所有的操作都是通过引擎对象
 		var xmlHttp = new XMLHttpRequest();
