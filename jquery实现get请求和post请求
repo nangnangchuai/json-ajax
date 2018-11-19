@@ -58,7 +58,7 @@ public class AjaxServlet2 extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		
+		//解析请求数据中的name的值。和age的值，{"name":"张三","age":25}, //请求参数
 		String name = request.getParameter("name");
 		String age = request.getParameter("age");
 		
@@ -66,7 +66,8 @@ public class AjaxServlet2 extends HttpServlet {
 		
 		
 		//java代码只能返回一个json格式的字符串,{\"name\":\"汤姆\",\"age\":21}
-    //不能直接写一个字符串比如"hahhah"
+                //不能直接写一个字符串比如"hahhah"
+		//解决中文乱码的问题
 		response.setContentType("text/html;charset=UTF-8");
 		response.getWriter().write("{\"name\":\"汤姆\",\"age\":21}");
 		
