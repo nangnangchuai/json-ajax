@@ -2,17 +2,17 @@
 <script type="text/javascript">
 function fn3(){
 		$.ajax({
-			url:"/WEB22/ajaxServlet2",
-			async:true,
-			type:"POST",
-			data:{"name":"lucy","age":18},
-			success:function(data){
+			url:"/WEB22/ajaxServlet2",//发送到的处理界面的地址，这里是项目名/文件名
+			async:true,               //是否异步
+			type:"POST",              //发送的方式
+			data:{"name":"lucy","age":18},//发送的数据
+			success:function(data){       //发送成功的响应
 				alert(data.name);
 			},
-			error:function(){
+			error:function(){             //发送请求失败的响应
 				alert("请求失败");
 			},
-			dataType:"json"
+			dataType:"json"                //接受响应的数据的格式，可以是xml，text
 		});
 	}
 </script>
